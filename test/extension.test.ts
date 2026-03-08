@@ -1,9 +1,7 @@
 import * as fs from 'fs';
 import * as rimraf from 'rimraf';
-import * as sinon from 'sinon';
 import * as chai from 'chai';
 import * as sinonChai from 'sinon-chai';
-import * as mocha from 'mocha';
 import * as path from 'path';
 import { AngularCli } from './../src/angular-cli';
 import { IConfig } from './../src/models/config';
@@ -13,7 +11,7 @@ import { resources } from './../src/resources';
 import { ResourceType } from './../src/enums/resource-type';
 import * as dJSON from 'dirty-json';
 
-chai.use(sinonChai);
+chai.use(sinonChai.default);
 
 const expect = chai.expect;
 let config: IConfig = dJSON.parse(JSON.stringify(defaultConfig));
@@ -174,7 +172,7 @@ describe('Extension Tests:', () => {
 
       const componentLocation = Object.assign({}, moduleLocation, { fullPath: path.join(testPath, 'my-module', 'JeffTest'), fileName: 'JeffTest', dirPath: path.join(testPath, 'my-module') });
       const result = await angularCli.generateResources(ResourceType.Component, componentLocation, config);
-   
+
       const realModuleFileContent = fs.readFileSync(path.join(moduleLocation.fullPath, moduleFilename), 'utf-8');
 
       expect(realModuleFileContent).to.be.eql(afterModuleContent);

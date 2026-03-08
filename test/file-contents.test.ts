@@ -1,16 +1,12 @@
-import * as myExtension from '../src/extension';
-import * as vscodeTestContent from 'vscode-test-content';
-import * as sinon from 'sinon';
 import * as chai from 'chai';
 import * as sinonChai from 'sinon-chai';
-import * as mocha from 'mocha';
 import { FileContents } from './../src/file-contents';
 import { TemplateType } from './../src/enums/template-type';
 import { config as defaultConfig } from './../src/config/cli-config';
 import { IConfig } from '../src/models/config';
 import * as dJSON from 'dirty-json';
 
-chai.use(sinonChai);
+chai.use(sinonChai.default);
 
 const expect = chai.expect;
 let config: IConfig = dJSON.parse(JSON.stringify(defaultConfig));
@@ -114,7 +110,7 @@ describe('File content tests', () => {
       const content = fc.getTemplateContent(TemplateType.PipeSpec, config, 'angular-files');
 
       expect(content).to.contain(`import { AngularFilesPipe } from './angular-files.pipe'`, 'Should have a valid import in spec').throw;
-      expect(content).to.contain(`describe('Pipe: AngularFilese'`, 'Should have a valid describe in spec').throw;
+      expect(content).to.contain(`describe('Pipe: AngularFiles'`, 'Should have a valid describe in spec').throw;
       expect(content).to.contain(`expect(pipe)`, 'Should have a valid expect in spec').throw;
       expect(content.split(/\r?\n/).pop()).to.be.eql('', 'Should end with a newline').throw;
     });
