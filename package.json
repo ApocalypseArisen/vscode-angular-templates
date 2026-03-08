@@ -9,7 +9,7 @@
         "name": "apo"
     },
     "engines": {
-        "vscode": "^1.22.0"
+        "vscode": "^1.109.0"
     },
     "repository": {
         "type": "git",
