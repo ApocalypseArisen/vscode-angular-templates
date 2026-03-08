@@ -30,7 +30,10 @@ describe('Extension Tests:', () => {
   });
 
   afterEach(() => {
-    rimraf.sync(`${testPath}/**/*`);
+    if (fs.existsSync(testPath)) {
+      rimraf.sync(testPath);
+      fs.mkdirSync(testPath);
+    }
   });
 
   after(() => {
@@ -156,6 +159,7 @@ describe('Extension Tests:', () => {
     });
 
     it('Should generate component with valid module declaration', async () => {
+        console.log("Sanity check")
       // tslint:disable-next-line:max-line-length
       const beforeModuleContent = `import { BrowserModule } from \'@angular/platform-browser\';\nimport { NgModule } from \'@angular/core\';\nimport { RouterModule, Routes } from \'@angular/router\';\n\nimport { AppComponent } from \'./app.component\';\nimport { AdminSettingsComponent } from \'./admin-settings/admin-settings.component\';\nimport { AdminLandingComponent } from \'./admin-landing/admin-landing.component\';\nimport { AdminSettingsGradeMarksComponent } from \'./admin-settings-grade-marks/admin-settings-grade-marks.component\';\n\nconst appRoutes: Routes = [\n  { path: \'settings/main\', component: AdminSettingsComponent },\n  { path: \'settings/grade-marks\', component: AdminSettingsGradeMarksComponent },\n  { path: \'\', component: AdminLandingComponent }\n];\n\n@NgModule({\n   declarations: [\n      AppComponent,\n      AdminSettingsComponent,\n      AdminLandingComponent,\n      AdminSettingsGradeMarksComponent\n   ],\n   imports: [\n      RouterModule.forRoot(appRoutes),\n      BrowserModule\n   ],\n   providers: [\n      RouterModule\n   ],\n   bootstrap: [\n      AppComponent\n   ]\n})\nexport class AppModule {}\n`;
       // tslint:disable-next-line:max-line-length
@@ -166,6 +170,7 @@ describe('Extension Tests:', () => {
       const moduleFilename = fs.readdirSync(moduleLocation.fullPath).find(f => f.endsWith('module.ts'));
 
       expect(moduleFilename).not.to.be.empty;
+        console.log("Module: " + moduleFilename)
 
       //  write test module content
       fs.writeFileSync(path.join(moduleLocation.fullPath, moduleFilename), beforeModuleContent,'utf-8');
