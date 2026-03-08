@@ -6,6 +6,16 @@ async function main() {
         const extensionDevelopmentPath = path.resolve(__dirname, '../');
         const extensionTestsPath = path.resolve(__dirname, './index');
 
+        // Extract --grep pattern from command line arguments
+        const grepIndex = process.argv.indexOf('--grep');
+        const grepPattern = grepIndex !== -1 && grepIndex + 1 < process.argv.length
+            ? process.argv.slice(grepIndex + 1).join(' ')
+            : undefined;
+
+        if (grepPattern) {
+            process.env.TEST_GREP = grepPattern;
+        }
+
         // run the integration tests using the VS Code Test Electron runner
         await runTests({
             extensionDevelopmentPath,

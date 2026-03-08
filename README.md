@@ -16,11 +16,26 @@ alongside the extension code.
 
 Simply execute:
 
+### Run all tests
 ```bash
 npm test
+```
+
+### Run a specific test
+```bash
+npm run test-single -- "Should generate component with valid module declaration"
+```
+
+### Run all tests matching a pattern
+```bash
+npm run test-single -- "component"
+```
+
+### Run all tests matching partial text
+```bash
+npm run test-single -- "valid module"
 ```
 
 This will build the extension and then spawn `vscode/test-electron` which in turn loads
 `out/test/runTest.js`. The existing spec files under `test/` are run via Mocha inside
 the extension host.
- 

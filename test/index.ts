@@ -11,6 +11,12 @@ export function run(): Promise<void> {
     const mocha = new Mocha({ ui: 'bdd', color: true });
     const testsRoot = path.resolve(__dirname);
 
+    // Support grep pattern for filtering tests
+    const grepPattern = process.env.TEST_GREP;
+    if (grepPattern) {
+        mocha.grep(grepPattern);
+    }
+
     return new Promise((resolve, reject) => {
         glob('**/*.test.js', { cwd: testsRoot }, (err, files) => {
             if (err) {

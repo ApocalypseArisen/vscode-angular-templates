@@ -74,7 +74,7 @@ export class AngularCli {
     if (moduleFiles.length > 0) {
       moduleFiles.sort((a: string, b: string) => path.dirname(a).length - path.dirname(b).length);
 
-      // find closest module      
+      // find closest module
       let [module] = moduleFiles;
       let minDistance = Infinity;
 

@@ -38,6 +38,42 @@
                 "_id": "build",
                 "isDefault": false
             }
+        },
+        {
+            "label": "test",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "test"
+            ],
+            "group": {
+                "_id": "test",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "test - single",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run",
+                "test-single",
+                "--",
+                "${input:testName}"
+            ],
+            "group": {
+                "_id": "test",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "testName",
+            "description": "Enter test name or pattern (e.g., 'Should generate component with valid module declaration')",
+            "type": "promptString",
+            "default": "Should generate component"
         }
     ]
 }

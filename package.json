@@ -34,7 +34,8 @@
         "templates": "mkdir -p ./out/src/templates && cp ./templates/*.tmpl ./out/src/templates/",
         "vscode:prepublish": "npm run templates && tsc -p ./",
         "compile": "npm run templates && tsc -watch -p ./",
-        "test": "npm run vscode:prepublish && node ./out/test/runTest.js"
+        "test": "npm run vscode:prepublish && node ./out/test/runTest.js",
+        "test-single": "node ./test/test-single.js"
     },
     "activationEvents": [
         "onLanguage:typescript"
